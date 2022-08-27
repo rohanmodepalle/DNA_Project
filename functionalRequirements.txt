@@ -1,0 +1,30 @@
+5 queries & 3 updates (all functional requirements to be
+satisfied too)
+
+Done:
+    - University creates accounts for examinee, examiner. (V)
+        - check validity of mobile number
+    - University schedules tests. (P)
+    - Proctors can sign up on the platform. (V)
+    - (Enroll University) (R)
+    - Examiner creates questions. (V)
+    - Modify the time duration of a test. (R)
+    - Take a test (R)
+    - generate random proctor ID
+    - Links for proctoring data
+    - Update the answer key. (P)
+    - Users can change their settings on the platform (dark/light mode, notification preferences, etcetera). (P)
+    - Retrieve all the tests scheduled by a particular university. (P)
+    - Search questions with a particular keyword by comparing the keyword with the Question
+    Text. (R)
+    - Name of examinees who belong to a particular university and have given a particular test. (V)
+    - Name of all examinees monitored by a proctor. (P)
+    - List details of question which have marks allocated more than the average marks per question in that test. (V)
+
+
+
+
+Optional:
+- Delete users when they leave the university. (R)
+- Show the most valuable (maximum marks) test from each university. (R)
+

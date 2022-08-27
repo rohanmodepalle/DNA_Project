@@ -1,0 +1,78 @@
+Table University {
+  UniversityID int [pk]
+  Name varchar(100) [not null]
+}
+
+Enum theme {
+  dark
+  light
+}
+
+Table Examinee {
+  Name varchar(50) [not null]
+  ExamineeID int [pk]
+  MobileNumber int(10) [not null, unique]
+  EmailID varchar(70) [not null, unique]
+  Audio varchar(30) [note: 'device name'] 
+  Video varchar(30) [note: 'device name']
+  Theme theme [default: 'light']
+  UniversityID int [ref: > University.UniversityID, not null]
+}
+
+Table Examiner {
+  Name varchar(50) [not null]
+  ExaminerID int [pk]
+  MobileNumber int(10) [not null, unique]
+  EmailID varchar(70) [not null, unique]
+  Audio varchar(30) [note: 'device name']
+  Video varchar(30) [note: 'device name']
+  Theme theme [default: 'light']
+  UniversityID int [not null, ref: > University.UniversityID]
+}
+
+Table Proctor {
+  Name varchar(50) 
+  ProctorID int [pk]
+  MobileNumber int(10) [not null, unique]
+  EmailID varchar(70) [not null, unique]
+  Audio varchar(30) [note: 'device name']
+  Video varchar(30) [note: 'device name']
+  Theme theme [default: 'light']
+}
+
+Table Test {
+  TestID int [pk]
+  ScheduledTime datetime [not null]
+  TimeDuration int [not null, note: 'in seconds']
+  TotalQuestions int [default: 0]
+  MaximumMarks  int [default: 0]
+  UniversityID int [not null, ref: > University.UniversityID]
+}
+
+Table Question {
+  ExaminerID int [not null, ref: > Examiner.ExaminerID]
+  QuestionID int [pk]
+  TestID int [ref: > Test.TestID, pk]
+  MarksAllocated int [not null]
+  QuestionText varchar(500) [not null]
+}
+
+Table Examination {
+  ExamineeID int [pk, ref: > Examinee.ExamineeID]
+  TestID int [pk, ref: > Test.TestID]
+  ProctorID int [not null, ref: > Proctor.ProctorID]
+  LinktoAudio varchar(100) [not null, unique]
+  LinktoVideo varchar(100) [not null, unique]
+}
+
+Table CorrectAnswer {
+  QuestionID int [ref: > Question.QuestionID, pk]
+  TestID int [ref: > Test.TestID, pk]
+  Answer varchar(500) [pk]
+}
+
+Table QuestionImage {
+  QuestionID int [not null, ref: > Question.QuestionID]
+  TestID int [not null, ref: > Test.TestID]
+  Link varchar(100) [pk]
+}
